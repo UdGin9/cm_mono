@@ -1,0 +1,44 @@
+# uv-specific
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# uv cache (по умолчанию в ~/.cache/uv, но иногда может быть локально)
+.uv_cache/
+
+# Если используешь uv sync --frozen или uv run — он может создавать .venv
+# (особенно если в pyproject.toml указано python = "..." и ты не используешь системный интерпретатор)
+
+# IDE / редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Логи и временные файлы
+*.log
+*.tmp
+
+# Секреты
+.env
+.env.local

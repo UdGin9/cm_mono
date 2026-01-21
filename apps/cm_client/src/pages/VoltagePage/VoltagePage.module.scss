@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: #111;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #1a1a1a 0%, #222 100%);
+    padding: 12px 24px;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #00ffaa;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0,255,170,0.3);
+}
+
+.redirection_button {
+    background: #00aa77;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.redirection_button:hover {
+    background: #00cc99;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,255,170,0.3);
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.left_column, .center_column, .right_column {
+    flex: 1;
+    display: flex;
+    background-color: #333;
+    height: calc(100vh - 108px);
+    flex-direction: column;
+    border-radius: 2%;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.left_column, .center_column, .right_column, h1 {
+    text-align: center;
+    color: #00ffaa;
+
+}
+
+.left_column, .center_column, .right_column, img {
+    object-fit: cover;
+}
+
+.voltage_card {
+    margin: 20px;
+    min-width: calc(50% - 8px);
+    height: 100px;
+    background: #222;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid;
+    animation: pulse 3s infinite;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.voltage_label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #aaa;
+}
+
+.voltage_base {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.voltage_value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.unit {
+    font-size: 1rem;
+    margin-left: 2px;
+}
+
+.container_sensors {
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.column_sensors {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.second_column_sensor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.third_column_sensor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.load_card {
+    background: #222;
+    border-radius: 8px;
+    padding: 15px;
+    width: 125px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid #00ffaa;
+    text-align: center;
+    animation: pulse 3s infinite;
+}
+
+.container_one_card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.high {
+    border-color: #ffcc00;
+    color: #ffcc00;
+}
+
+.high .status_indicator {
+    background: linear-gradient(90deg, #ffcc00 0%, rgba(255,204,0,0.2) 100%);
+}
+
+.low {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.low .status_indicator {
+    background: linear-gradient(90deg, #ff4444 0%, rgba(255,68,68,0.2) 100%);
+}
+
+.row_sensor_columns {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}   
