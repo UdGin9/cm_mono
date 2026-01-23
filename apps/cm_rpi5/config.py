@@ -1,4 +1,4 @@
-LOCAL_CAMERA_IDS = [0]
+LOCAL_CAMERA_IDS = [0,2]
 
 LOCAL_SENSOR_PORTS = ['/dev/ttyUSB0', '/dev/ttyUSB1']
 
