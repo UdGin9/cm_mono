@@ -5,15 +5,30 @@ interface VoltageToastProps {
   message: string;
   voltage: string;
   value: number;
-  type: 'warning' | 'critical';
 }
 
-export const VoltageToast: React.FC<VoltageToastProps> = ({ message, voltage, value, type }) => {
+const getWagonName = (voltage: string): string => {
+  switch (voltage) {
+    case 'voltage_0':
+      return 'головном вагоне'
+    case 'voltage_1':
+      return 'промежуточном вагоне'
+    case 'voltage_2':
+      return 'концевом вагоне'
+    default:
+      return 'неизвестном месте'
+  }
+}
+
+export const VoltageToast: React.FC<VoltageToastProps> = ({ message, voltage, value }) => {
+  const wagonName = getWagonName(voltage)
+  const fullMessage = `${message} в ${wagonName}!`
+
   return (
-    <div className={`${s.toast} ${s[type]}`}>
-      <strong className={s.message}>{message}</strong>
+    <div className={s.containerToast}>
+      <strong className={s.message}>{fullMessage}</strong>
       <small className={s.details}>
-        Датчик: <code>{voltage + 1}</code> | Напряжение: <code>{value}V</code>
+       Напряжение: <code>{value}V</code>
       </small>
     </div>
   )

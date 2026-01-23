@@ -4,7 +4,7 @@ import { useVoltageStore } from '../store/voltageStore';
 const api = import.meta.env.VITE_BASE_RASPBERRY_5_URL;
 
 export const useVoltagePoling = () => {
-  const setVoltages = useVoltageStore((state) => state.setVoltages)
+  const setVoltages = useVoltageStore((state) => state.setAllVoltages)
 
   useEffect(() => {
     const fetchData = async () => {

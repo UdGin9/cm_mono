@@ -78,6 +78,21 @@ main {
     object-fit: cover;
 }
 
+.normal {
+  border-color: #00ffaa;
+  color: #00ffaa;
+}
+
+.warning {
+  border-color: #ffcc00;
+  color: #ffcc00;
+}
+
+.critical {
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
 .voltage_card {
     margin: 20px;
     min-width: calc(50% - 8px);

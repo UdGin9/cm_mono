@@ -22,23 +22,16 @@ wheels/
 .installed.cfg
 *.egg
 
-# uv cache (по умолчанию в ~/.cache/uv, но иногда может быть локально)
 .uv_cache/
 
-# Если используешь uv sync --frozen или uv run — он может создавать .venv
-# (особенно если в pyproject.toml указано python = "..." и ты не используешь системный интерпретатор)
-
-# IDE / редакторы
 .vscode/
 .idea/
 *.swp
 *.swo
 .DS_Store
 
-# Логи и временные файлы
 *.log
 *.tmp
 
-# Секреты
 .env
 .env.local

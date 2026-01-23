@@ -44,14 +44,14 @@ class VoltageStream:
                     voltage=voltage_name,
                     value=value,
                     event_type="critical",
-                    message=f"Критически высокое напряжение на {voltage_name}!"
+                    message=f"Критически высокое напряжение"
                 )
             elif value > 3.5:
                 return VoltageEvent(
                     voltage=voltage_name,
                     value=value,
                     event_type="warning",
-                    message=f"Повышенное напряжение на {voltage_name}"
+                    message=f"Повышенное напряжение"
                 )
         return None
 

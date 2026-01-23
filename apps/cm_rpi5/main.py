@@ -47,13 +47,13 @@ def get_all_sensors():
     data = {}
 
     for i, sensor in enumerate(local_sensors):
-        data[f"sensor_{i}"] = sensor.get_data()
-    data['sensor_2'] = local_sensors[0].get_fluctuated_data()
+        data[f"sensor_{i}"] = round(sensor.get_data(),1)
+    data['sensor_2'] = round(local_sensors[0].get_fluctuated_data(),1)
 
     remote_data = remote_client.get_sensor_data()
 
-    data["sensor_3"] = remote_data.get("sensor_data_1", 0.0)
-    data["sensor_4"] = remote_data.get("sensor_data_2", 0.0)
+    data["sensor_3"] = round(remote_data.get("sensor_data_1", 0.0),1)
+    data["sensor_4"] = round(remote_data.get("sensor_data_2", 0.0),1)
 
     return jsonify(data)
 
