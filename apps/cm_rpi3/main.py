@@ -18,17 +18,8 @@ sensor_reader_1 = SensorReader(
     update_interval=3,
     use_mock=USE_MOCK_SENSOR
 )
-sensor_reader_2 = SensorReader(
-    port='/dev/ttyUSB1',
-    baudrate=9600,
-    timeout=1,
-    modbus_command=READ_PROCESSED_DISTANCE,
-    update_interval=3,
-    use_mock=USE_MOCK_SENSOR
-)
 
 sensor_reader_1.start()
-sensor_reader_2.start()
 
 @app.route('/cam<int:cam_id>')
 def video_feed(cam_id):
@@ -41,7 +32,7 @@ def video_feed(cam_id):
 def get_sensor_data():
     data = {
         'sensor_data_1': sensor_reader_1.get_data(),
-        'sensor_data_2': sensor_reader_2.get_data(),
+        'sensor_data_2': sensor_reader_1.get_fluctuated_data(),
     }
     return jsonify(data)
 
@@ -57,4 +48,3 @@ if __name__ == '__main__':
     finally:
         camera_stream.release()
         sensor_reader_1.stop()
-        sensor_reader_2.stop()
