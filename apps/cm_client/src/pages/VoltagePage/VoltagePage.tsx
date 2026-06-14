@@ -4,123 +4,213 @@ import { useLevelStore } from '../../store/levelStore'
 import { useVoltageStore } from '../../store/voltageStore'
 import { useVoltagePoling } from '../../hooks/useVoltagePoling'
 import { useVoltageEvents } from '../../hooks/useVoltageEvents'
+import { VoltageChart } from './components/VoltageChart'
 
 export const VoltagePage = () => {
-
+  
   useSensorPolling()
   useVoltagePoling()
   useVoltageEvents()
 
-  const { sensor_0, sensor_1, sensor_2, sensor_3, sensor_4 } = useLevelStore()
+  const { sensor_0, sensor_1, sensor_2, sensor_3, sensor_4, load_vagon_1, load_vagon_2, load_vagon_3 } = useLevelStore()
 
   const { voltage_0, voltage_1, voltage_2, voltageStatuses } = useVoltageStore()
   
 
   return (
     <div className={s.pageContainer}>
-      <header>
-        <form action="/">
-          <button className={s.redirection_button}>К видео-мониторингу</button>
-        </form>
-        <h1>Система мониторинга машины</h1>
-      </header>
-
-      <main>
-        <div className={s.left_column}>
-          <img src="/1.png" alt="Головная машина" />
-          <h2>Головная машина</h2>
-          <div className={`${s.voltage_card} ${s[voltageStatuses.voltage_0] || ''}`}>
-            <div className={s.card_header}>
-              <span className={s.voltage_label}>Напряжение на электродвигателе</span>
-              <span className={s.voltage_base}>3.3</span>
-            </div>
-            <div className={s.voltage_value}>{voltage_0}<span className={s.unit}>V</span></div>
-            <div className={s.status_indicator}></div>
+      <div className={s.vagonsContainer}>
+          <div className={s.vagon}>
+              <div className={s.head}>[ ГОЛОВНАЯ МАШИНА ]</div>
+              <div className={s.imageWrapper}>
+                  <img src='./1.svg' alt='Головная машина' />
+                  <div className={s.badge} style={{ top: '13%', left: '58%' }}>
+                      <span className={s.badgeLabel}>ЗАГРУЗКА</span>
+                      <span className={s.badgeValue}>{load_vagon_1}%</span>
+                  </div>
+                  <div className={s.badge} style={{ top: '72%', left: '55%' }}>
+                      <span className={s.badgeLabel}>U</span>
+                      <span className={s.badgeValue}>{voltage_0} V</span>
+                  </div>
+              </div>
           </div>
+
+          <div className={s.vagon}>
+              <div className={s.head}>[ ПРОМЕЖУТОЧНЫЙ ВАГОН ]</div>
+              <div className={s.imageWrapper}>
+                  <img src='./2.svg' alt='Промежуточный вагон' />
+                  <div className={s.badge} style={{ top: '18%', left: '50%' }}>
+                      <span className={s.badgeLabel}>ЗАГРУЗКА</span>
+                      <span className={s.badgeValue}>{load_vagon_2}%</span>
+                  </div>
+                  <div className={s.badge} style={{ top: '68%', left: '50%' }}>
+                    <span className={s.badgeLabel}>U</span>
+                    <span className={s.badgeValue}>{voltage_1} V</span>
+                  </div>
+              </div>
+          </div>
+
+          <div className={s.vagon}>
+              <div className={s.head}>[ КОНЦЕВОЙ ВАГОН ]</div>
+              <div className={s.imageWrapper}>
+                  <img src='./3.svg' alt='Концевой вагон' />
+                  <div className={s.badge} style={{ top: '13%', left: '49%' }}>
+                    <span className={s.badgeLabel}>ЗАГРУЗКА</span>
+                    <span className={s.badgeValue}>{load_vagon_3}%</span>
+                  </div>
+                  <div className={s.badge} style={{ top: '75%', left: '50%' }}>
+                    <span className={s.badgeLabel}>U</span>
+                    <span className={s.badgeValue}>{voltage_2} V</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        <div className={s.cardsContainer}>
+
+            <div className={s.card}>
+               <div className={s.head}>
+                  <div className={s.modul}>МОДУЛЬ 1</div>
+                  <div className={s.name}>Головная машина</div>
+               </div>
+               <div className={s.chartContainer}>
+                  <div className={s.text}>Напряжение на двигателе</div>
+                  <div className={s.info}>
+                      <div className={s.voltage}>{voltage_0}<span> V</span></div>
+                      <div className={s.nominal}>НОМ 3.30 ±0.5</div>
+                  </div>
+                  <div className={s.chart}>
+                     <VoltageChart data={[0,1,2,3,1,2,3,4,5,11,4]} />
+                  </div>
+              </div>
+
+
+              <div className={s.loadWrapper}>
+                <div className={s.headContainer}>
+                  <div className={s.head}>ДАТЧИКИ ЗАГРУЗКИ</div>
+                  <div className={s.head}>2 шт</div>
+                </div>
+              </div>
+              
+              <div className={s.levelCards}>
+
+                <div className={s.levelCard}>
+                    <div className={s.numberSensor}>Датчик 1</div>
+                    <span className={s.mm}><span className={s.number}>{sensor_0}</span> мм</span>
+                </div>
+
+                <div className={s.levelCard}>
+                    <div className={s.numberSensor}>Датчик 2</div>
+                    <span className={s.mm}><span className={s.number}>{sensor_1}</span> мм</span>
+                </div>
+
+                <div className={s.loadCard}>
+                    <div className={s.numberSensor}>Загрузка вагона</div>
+                    <span className={s.mm}><span className={s.number}>{load_vagon_1}</span> %</span>
+                      <div className={s.progressBar}>
+                        <div className={s.progressFill} style={{ width: `${load_vagon_1}` }}></div>
+                      </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className={s.card}>
+               <div className={s.head}>
+                  <div className={s.modul}>МОДУЛЬ 2</div>
+                  <div className={s.name}>Промежуточный вагон</div>
+               </div>
+               <div className={s.chartContainer}>
+                  <div className={s.text}>Напряжение на двигателе</div>
+                  <div className={s.info}>
+                      <div className={s.voltage}>{voltage_1}<span> V</span></div>
+                      <div className={s.nominal}>НОМ 3.30 ±0.5</div>
+                  </div>
+                  <div className={s.chart}>
+                     <VoltageChart data={[0,1,2,3,1,2,3,4,5,11,4]} />
+                  </div>
+              </div>
+
+
+              <div className={s.loadWrapper}>
+                <div className={s.headContainer}>
+                  <div className={s.head}>ДАТЧИКИ ЗАГРУЗКИ</div>
+                  <div className={s.head}>2 шт</div>
+                </div>
+              </div>
+              
+              <div className={s.levelCards}>
+
+                <div className={s.levelCard}>
+                    <div className={s.numberSensor}>Датчик 3</div>
+                    <span className={s.mm}><span className={s.number}>{sensor_2}</span> мм</span>
+                </div>
+
+                <div className={s.levelCard}>
+                    <div className={s.numberSensor}>Датчик 4</div>
+                    <span className={s.mm}><span className={s.number}>{sensor_3}</span> мм</span>
+                </div>
+
+                <div className={s.loadCard}>
+                    <div className={s.numberSensor}>Загрузка вагона</div>
+                    <span className={s.mm}><span className={s.number}>{load_vagon_2}</span> %</span>
+                      <div className={s.progressBar}>
+                        <div className={s.progressFill} style={{ width: `${load_vagon_2}` }}></div>
+                      </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className={s.card}>
+               <div className={s.head}>
+                  <div className={s.modul}>МОДУЛЬ 3</div>
+                  <div className={s.name}>Концевой вагон</div>
+               </div>
+               <div className={s.chartContainer}>
+                  <div className={s.text}>Напряжение на двигателе</div>
+                  <div className={s.info}>
+                      <div className={s.voltage}>{voltage_2}<span> V</span></div>
+                      <div className={s.nominal}>НОМ 3.30 ±0.5</div>
+                  </div>
+                  <div className={s.chart}>
+                     <VoltageChart data={[0,1,2,3,1,2,3,4,5,11,4]} />
+                  </div>
+              </div>
+
+
+              <div className={s.loadWrapper}>
+                <div className={s.headContainer}>
+                  <div className={s.head}>ДАТЧИКИ ЗАГРУЗКИ</div>
+                  <div className={s.head}>1 шт</div>
+                </div>
+              </div>
+              
+              <div className={s.levelCards}>
+
+                <div className={s.levelCard}>
+                    <div className={s.numberSensor}>Датчик 5</div>
+                    <span className={s.mm}><span className={s.number}>{sensor_4}</span> мм</span>
+                </div>
+
+                <div className={s.loadCard}>
+                    <div className={s.numberSensor}>Загрузка вагона</div>
+                    <span className={s.mm}><span className={s.number}>{load_vagon_3}</span> %</span>
+                      <div className={s.progressBar}>
+                        <div className={s.progressFill} style={{ width: `${load_vagon_3}` }}></div>
+                      </div>
+                </div>
+
+              </div>
+
+            </div>
+
         </div>
-
-        <div className={s.center_column}>
-          <img src="/2.png" alt="Промежуточный вагон" />
-          <h2>Промежуточный вагон</h2>
-          <div className={`${s.voltage_card} ${s[voltageStatuses.voltage_1] || ''}`}>
-            <div className={s.card_header}>
-              <span className={s.voltage_label}>Напряжение на электродвигателе</span>
-              <span className={s.voltage_base}>3.1</span>
-            </div>
-            <div className={s.voltage_value}>{voltage_1}<span className={s.unit}>V</span></div>
-            <div className={s.status_indicator}></div>
-          </div>
-
-          <div className={s.container_sensors}>
-            <div className={s.column_sensors}>
-              <div className={s.load_card}>
-                <div className={s.load_card_header}>
-                  <span className={s.load_title}>Датчик 1</span>
-                </div>
-                <div className={s.load_value}>{sensor_0}<span className={s.load_unit}> мм</span></div>
-              </div>
-              <div className={s.load_card}>
-                <div className={s.load_card_header}>
-                  <span className={s.load_title}>Датчик 2</span>
-                </div>
-                <div className={s.load_value}>{sensor_1}<span className={s.load_unit}> мм</span></div>
-              </div>
-              <div className={s.load_card}>
-                <div className={s.load_card_header}>
-                  <span className={s.load_title}>Датчик 3</span>
-                </div>
-                <div className={s.load_value}>{sensor_2}<span className={s.load_unit}> мм</span></div>
-              </div>
-            </div>
-
-            <div className={s.second_column_sensor}>
-              <div className={s.load_card}>
-                <div className={s.load_card_header}>
-                  <span className={s.load_title}>Датчик 4</span>
-                </div>
-                <div className={s.load_value}>{sensor_3}<span className={s.load_unit}> мм</span></div>
-              </div>
-            </div>
-
-            <div className={s.third_column_sensor}>
-              <div className={`${s.load_card} ${s.container_one_card}`}>
-                <div className={s.load_card_header}>
-                  <span className={s.load_title}>Общая загрузка </span>
-                </div>
-                <div className={s.load_value}>{}<span className={s.load_unit}>%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={s.right_column}>
-          <img src="/3.png" alt="Концевой вагон" />
-          <h2>Концевой вагон</h2>
-          <div className={`${s.voltage_card} ${s[voltageStatuses.voltage_2] || ''}`}>
-            <div className={s.card_header}>
-              <span className={s.voltage_label}>Напряжение на электродвигателе</span>
-              <span className={s.voltage_base}>3.2</span>
-            </div>
-            <div className={s.voltage_value}>{voltage_2}<span className={s.unit}>V</span></div>
-            <div className={s.status_indicator}></div>
-          </div>
-
-          <div className={s.row_sensor_columns}>
-            <div className={s.load_card}>
-              <div className={s.load_card_header}>
-                <span className={s.load_title}>Датчик 5</span>
-              </div>
-              <div className={s.load_value}>{sensor_4}<span className={s.load_unit}> мм</span></div>
-            </div>
-            <div className={`${s.load_card} ${s.container_one_card}`}>
-              <div className={s.load_card_header}>
-                <span className={s.load_title}>Общая загрузка </span>
-              </div>
-              <div className={s.load_value}>20<span className={s.load_unit}>%</span></div>
-            </div>
-          </div>
-        </div>
-      </main>
+        
     </div>
   );
 };

@@ -1,217 +1,232 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    width: 100%;
-    background-color: #111;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-}
-
-header {
+.pageContainer {
     display: flex;
-    align-items: center;
-    background: linear-gradient(90deg, #1a1a1a 0%, #222 100%);
-    padding: 12px 24px;
-    border-bottom: 1px solid #333;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-header h1 {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: #00ffaa;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(0,255,170,0.3);
-}
-
-.redirection_button {
-    background: #00aa77;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.redirection_button:hover {
-    background: #00cc99;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,255,170,0.3);
-}
-
-main {
-    padding: 20px;
-    display: flex;
-    gap: 20px;
-}
-
-.left_column, .center_column, .right_column {
-    flex: 1;
-    display: flex;
-    background-color: #333;
-    height: calc(100vh - 108px);
+    padding: 18px 50px;
     flex-direction: column;
-    border-radius: 2%;
-    overflow: hidden;
     gap: 10px;
+
+    .vagonsContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 10px;
+
+        .vagon {
+            background-color: var(--bg-white);
+            flex: 1;
+
+            .imageWrapper {
+                position: relative;
+                width: 100%;
+            }
+
+            img {
+                max-width: 100%;
+                height: 180px;
+                padding: 8px 16px;
+                box-sizing: border-box;
+            }
+
+            .head {
+                width: 100%;
+                padding: 14px 16px 6px 16px;
+                color: var(--accent);
+            }
+
+            .badge {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                display: flex;
+                align-items: center;
+                background-color: #02060A;
+                border-left: 3px solid var(--accent);
+                border-top: 1.5px solid var(--accent);
+                border-bottom: 1.5px solid var(--accent);
+                border-right: 1.5px solid var(--accent);
+                padding: 4px 8px;
+                gap: 8px;
+                line-height: 1;
+                white-space: nowrap;
+                font-variant-numeric: tabular-nums;
+                pointer-events: none;
+            }
+
+            .badgeLabel {
+                font-size: 11px;
+                color: var(--text-primary)
+            }
+
+            .badgeValue {
+                color: var(--accent);
+                font-size: 7px;
+            }
+        }
+    }
+
+    .cardsContainer {
+        display: flex;
+        gap: 8px;
+
+        .card {
+            padding: 0 16px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-white);
+            flex: 1;
+            .head {
+                padding: 14px 16px 6px 0px;
+
+                .modul {
+                    font-size: 11px;
+                    color: var(--text-secondary);
+                }
+                .name {
+                    font-size: 20px;
+                    font-weight: var(--fw-bold);
+                    color: var(--accent);
+                }
+            }
+
+            .normal {
+                background-color: var(--accent-red);
+            }
+            .warning {
+                background-color: var(--accent-orange);
+            }   
+            .critical {
+                background-color: var(--accent-secondary);
+            }
+
+            .chartContainer {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 14px 16px;
+                color: var(--red);
+                border-left: 3px solid var(--red);
+                border-right: 1px solid var(--text-secondary);
+                border-top: 1px solid var(--text-secondary);
+                border-bottom: 1px solid var(--text-secondary);
+                background-color: var(--accent-red);
+
+                .text {
+                    font-size: 14px;
+                }
+
+                .info {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    .voltage {
+                        font-size: 44px;
+                        letter-spacing: 0.66px;
+                        span {
+                            font-size: 16px;
+                            font-weight: var(--fw-bold);
+                        }
+                    }
+                    .nominal {
+                        font-size: 11px;
+                        align-self: flex-end;
+                    }
+                }
+                .chart {
+                    height: 40px;
+                }
+
+            }
+
+            .loadWrapper {
+                .headContainer {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    justify-content: space-between;
+                    .head {
+                        font-size: 11px;
+                        color: var(--text-secondary);
+                    }
+                }
+            }
+            
+                .levelCards {
+                   display: flex;
+                   gap: 4px;
+                   flex-direction: row;
+                   flex-wrap: wrap;
+
+                   .levelCard {
+                        display: flex;
+                        flex-direction: column;
+                        width: calc(50% - 4px);
+                        padding: 10px 12px;
+                        background-color: var(--bg-primary);
+                        border-left: 3px solid var(--accent);
+                        border-right: 1px solid var(--text-secondary);
+                        border-top: 1px solid var(--text-secondary);
+                        border-bottom: 1px solid var(--text-secondary);
+
+                        .numberSensor {
+                            font-size: 12px;
+                            color: var(--text-secondary);
+                        }
+                        
+                        .mm {
+                            font-size: 18px;
+                            color: var(--accent);
+                            font-weight: var(--fw-bold);
+                        }
+
+                        .number {
+                            font-size: 18px;
+                            color: var(--accent);
+                        }
+                   }
+
+                   .loadCard {
+                        display: flex;
+                        flex-direction: column;
+                        width: calc(50% - 4px);
+                        padding: 10px 12px;
+                        background-color: var(--bg-primary);
+                        border-left: 3px solid var(--accent);
+                        border-right: 1px solid var(--text-secondary);
+                        border-top: 1px solid var(--text-secondary);
+                        border-bottom: 1px solid var(--text-secondary);
+
+                        .progressBar {
+                            width: 100%;
+                            height: 3px;
+                            background-color: #E5E8EF;
+                            border-radius: 2px;
+                            margin-top: 4px;
+                            overflow: hidden;
+
+                        .progressFill {
+                            height: 100%;
+                            background-color: var(--accent);
+                            border-radius: 2px;
+                            transition: width 0.3s ease;
+                            }
+                        }
+
+                        .numberSensor {
+                            font-size: 12px;
+                            color: var(--text-secondary);
+                        }
+                        
+                        .mm {
+                            font-size: 18px;
+                            color: var(--accent);
+                            font-weight: var(--fw-bold);
+                        }
+
+                        .number {
+                            font-size: 18px;
+                            color: var(--accent);
+                        }
+                   }
+                }
+        } 
+    }
 }
-
-.left_column, .center_column, .right_column, h1 {
-    text-align: center;
-    color: #00ffaa;
-
-}
-
-.left_column, .center_column, .right_column, img {
-    object-fit: cover;
-}
-
-.normal {
-  border-color: #00ffaa;
-  color: #00ffaa;
-}
-
-.warning {
-  border-color: #ffcc00;
-  color: #ffcc00;
-}
-
-.critical {
-  border-color: #ff4444;
-  color: #ff4444;
-}
-
-.voltage_card {
-    margin: 20px;
-    min-width: calc(50% - 8px);
-    height: 100px;
-    background: #222;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border-left: 4px solid;
-    animation: pulse 3s infinite;
-}
-
-.card_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.voltage_label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #aaa;
-}
-
-.voltage_base {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.voltage_value {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 8px 0;
-    text-align: center;
-}
-
-.unit {
-    font-size: 1rem;
-    margin-left: 2px;
-}
-
-.container_sensors {
-    gap: 20px;
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
-}
-
-.column_sensors {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.second_column_sensor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.third_column_sensor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.load_card {
-    background: #222;
-    border-radius: 8px;
-    padding: 15px;
-    width: 125px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border-left: 4px solid #00ffaa;
-    text-align: center;
-    animation: pulse 3s infinite;
-}
-
-.container_one_card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.high {
-    border-color: #ffcc00;
-    color: #ffcc00;
-}
-
-.high .status_indicator {
-    background: linear-gradient(90deg, #ffcc00 0%, rgba(255,204,0,0.2) 100%);
-}
-
-.low {
-    border-color: #ff4444;
-    color: #ff4444;
-}
-
-.low .status_indicator {
-    background: linear-gradient(90deg, #ff4444 0%, rgba(255,68,68,0.2) 100%);
-}
-
-.row_sensor_columns {
-    display: flex;
-    padding: 20px;
-    justify-content: space-around;
-    align-items: center;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-}   

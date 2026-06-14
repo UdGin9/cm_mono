@@ -6,6 +6,7 @@ interface VoltageState {
   voltage_0: number
   voltage_1: number
   voltage_2: number
+  voltage_warning_count: 0
   voltageStatuses: Record<string, VoltageStatus>
   setVoltageValue: (field: string, value: number) => void
   setVoltageStatus: (voltageKey: string, status: VoltageStatus) => void
@@ -21,6 +22,7 @@ export const useVoltageStore = create<VoltageState>((set) => ({
     voltage_1: 'normal',
     voltage_2: 'normal',
   },
+  voltage_warning_count: 0, 
   setVoltageValue: (field, value) =>
     set((state) => ({ ...state, [field]: value })),
   setVoltageStatus: (voltageKey, status) =>
