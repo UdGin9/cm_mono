@@ -1,7 +1,17 @@
 LOCAL_CAMERA_IDS = [0,2]
+# Поворот кадра по физическому id камеры: 90 / 180 / 270 градусов.
+CAMERA_ROTATIONS = {2: 180}
 
 LOCAL_SENSOR_PORTS = ['/dev/ttyUSB0', '/dev/ttyUSB1']
 
 ASSISTANT_SERVER_URL = 'http://192.168.31.50:15555'
 
 FLASK_PORT = 15555
+
+# Норма  : |U - NOMINAL| <= WARN_DELTA
+# Warning: WARN_DELTA < |U - NOMINAL| <= CRIT_DELTA
+# Critical: |U - NOMINAL| > CRIT_DELTA
+
+VOLTAGE_NOMINAL = 3.30
+VOLTAGE_WARN_DELTA = 0.20   # норма: 3.10–3.50
+VOLTAGE_CRIT_DELTA = 0.30   # критично: <3.00 или >3.60

@@ -11,7 +11,8 @@ class VoltageEvent:
     message: str
 
 class VoltageStream:
-    def __init__(self, sensor_count: int = 3, base_voltages: List[float] = None, update_interval_sec: float = 15.0):
+    def __init__(self, sensor_count: int = 3, base_voltages: List[float] = None, update_interval_sec: float = 15.0,
+                 nominal: float = 3.30, warn_delta: float = 0.20, crit_delta: float = 0.30):
         self.sensor_count = sensor_count
         if base_voltages is None:
             self.base_voltages = [3.3, 3.1, 3.2][:sensor_count]
@@ -20,6 +21,9 @@ class VoltageStream:
                 raise ValueError("Длина base_voltages должна совпадать с sensor_count")
             self.base_voltages = base_voltages
 
+        self.nominal = nominal
+        self.warn_delta = warn_delta
+        self.crit_delta = crit_delta
         self.update_interval_sec = update_interval_sec
         self._current_voltages: Dict[str, float] = {}
         self._last_event: Optional[VoltageEvent] = None
@@ -39,19 +43,21 @@ class VoltageStream:
     def _check_for_events(self, voltages: List[float]) -> Optional[VoltageEvent]:
         for i, value in enumerate(voltages):
             voltage_name = f"voltage_{i}"
-            if value > 3.6:
+            deviation = abs(value - self.nominal)
+            high = value > self.nominal
+            if deviation > self.crit_delta:
                 return VoltageEvent(
                     voltage=voltage_name,
                     value=value,
                     event_type="critical",
-                    message=f"Критически высокое напряжение"
+                    message="Критически высокое напряжение" if high else "Критически низкое напряжение"
                 )
-            elif value > 3.5:
+            elif deviation > self.warn_delta:
                 return VoltageEvent(
                     voltage=voltage_name,
                     value=value,
                     event_type="warning",
-                    message=f"Повышенное напряжение"
+                    message="Повышенное напряжение" if high else "Пониженное напряжение"
                 )
         return None
 

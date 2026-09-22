@@ -1,3 +1,35 @@
+/* Цветовые состояния — применяются к отдельным элементам (график напряжения,
+   карточка датчика в мм, карточка загрузки в %). Задают локальную тему через
+   CSS-переменные, которые используют .chartContainer / .levelCard / .loadCard. */
+.stateNormal {
+    --c-accent: var(--accent);
+    --c-accent-strong: var(--accent);
+    --c-bg-tint: var(--bg-primary);
+}
+.stateDanger {
+    --c-accent: var(--state-danger);
+    --c-accent-strong: var(--state-danger-strong);
+    --c-bg-tint: var(--state-danger-bg);
+}
+.stateWarning {
+    --c-accent: var(--state-warning);
+    --c-accent-strong: var(--state-warning-strong);
+    --c-bg-tint: var(--state-warning-bg);
+}
+.stateOk {
+    --c-accent: var(--state-ok);
+    --c-accent-strong: var(--state-ok-strong);
+    --c-bg-tint: var(--state-ok-bg);
+}
+
+/* Окантовка карточки по статусу напряжения (как в дизайне). */
+.edgeWarning {
+    --card-edge: var(--state-warning-strong);
+}
+.edgeDanger {
+    --card-edge: var(--state-danger-strong);
+}
+
 .pageContainer {
     display: flex;
     padding: 18px 50px;
@@ -38,26 +70,28 @@
                 display: flex;
                 align-items: center;
                 background-color: #02060A;
-                border-left: 3px solid var(--accent);
-                border-top: 1.5px solid var(--accent);
-                border-bottom: 1.5px solid var(--accent);
-                border-right: 1.5px solid var(--accent);
+                border-left: 3px solid var(--c-accent-strong, var(--accent));
+                border-top: 1.5px solid var(--c-accent-strong, var(--accent));
+                border-bottom: 1.5px solid var(--c-accent-strong, var(--accent));
+                border-right: 1.5px solid var(--c-accent-strong, var(--accent));
                 padding: 4px 8px;
                 gap: 8px;
                 line-height: 1;
                 white-space: nowrap;
                 font-variant-numeric: tabular-nums;
                 pointer-events: none;
+                transition: border-color 0.3s ease;
             }
 
             .badgeLabel {
                 font-size: 11px;
-                color: var(--text-primary)
+                color: var(--border-light)
             }
 
             .badgeValue {
-                color: var(--accent);
+                color: var(--c-accent, var(--accent));
                 font-size: 7px;
+                transition: color 0.3s ease;
             }
         }
     }
@@ -71,7 +105,17 @@
             display: flex;
             flex-direction: column;
             background-color: var(--bg-white);
+            border: 2px solid var(--card-edge, var(--border-light));
+            transition: border-color 0.3s ease;
             flex: 1;
+
+            /* Тема по умолчанию (наследуется элементами без явного состояния). */
+            /* Конкретные элементы переопределяют её классами .stateNormal/.stateWarning/.stateDanger/.stateOk. */
+            --c-accent: var(--accent);
+            --c-accent-strong: var(--accent);
+            --c-bg-tint: var(--bg-primary);
+            --c-border: var(--border-light);
+
             .head {
                 padding: 14px 16px 6px 0px;
 
@@ -82,18 +126,8 @@
                 .name {
                     font-size: 20px;
                     font-weight: var(--fw-bold);
-                    color: var(--accent);
+                    color: var(--c-accent);
                 }
-            }
-
-            .normal {
-                background-color: var(--accent-red);
-            }
-            .warning {
-                background-color: var(--accent-orange);
-            }   
-            .critical {
-                background-color: var(--accent-secondary);
             }
 
             .chartContainer {
@@ -102,12 +136,12 @@
                 flex-direction: column;
                 gap: 10px;
                 padding: 14px 16px;
-                color: var(--red);
-                border-left: 3px solid var(--red);
-                border-right: 1px solid var(--text-secondary);
-                border-top: 1px solid var(--text-secondary);
-                border-bottom: 1px solid var(--text-secondary);
-                background-color: var(--accent-red);
+                color: var(--c-accent);
+                border-left: 3px solid var(--c-accent-strong);
+                border-right: 1px solid var(--c-border);
+                border-top: 1px solid var(--c-border);
+                border-bottom: 1px solid var(--c-border);
+                background-color: var(--c-bg-tint);
 
                 .text {
                     font-size: 14px;
@@ -160,26 +194,26 @@
                         flex-direction: column;
                         width: calc(50% - 4px);
                         padding: 10px 12px;
-                        background-color: var(--bg-primary);
-                        border-left: 3px solid var(--accent);
-                        border-right: 1px solid var(--text-secondary);
-                        border-top: 1px solid var(--text-secondary);
-                        border-bottom: 1px solid var(--text-secondary);
+                        background-color: var(--c-bg-tint);
+                        border-left: 3px solid var(--c-accent-strong);
+                        border-right: 1px solid var(--c-border);
+                        border-top: 1px solid var(--c-border);
+                        border-bottom: 1px solid var(--c-border);
 
                         .numberSensor {
                             font-size: 12px;
                             color: var(--text-secondary);
                         }
-                        
+
                         .mm {
                             font-size: 18px;
-                            color: var(--accent);
+                            color: var(--c-accent);
                             font-weight: var(--fw-bold);
                         }
 
                         .number {
                             font-size: 18px;
-                            color: var(--accent);
+                            color: var(--c-accent);
                         }
                    }
 
@@ -188,11 +222,11 @@
                         flex-direction: column;
                         width: calc(50% - 4px);
                         padding: 10px 12px;
-                        background-color: var(--bg-primary);
-                        border-left: 3px solid var(--accent);
-                        border-right: 1px solid var(--text-secondary);
-                        border-top: 1px solid var(--text-secondary);
-                        border-bottom: 1px solid var(--text-secondary);
+                        background-color: var(--c-bg-tint);
+                        border-left: 3px solid var(--c-accent-strong);
+                        border-right: 1px solid var(--c-border);
+                        border-top: 1px solid var(--c-border);
+                        border-bottom: 1px solid var(--c-border);
 
                         .progressBar {
                             width: 100%;
@@ -204,7 +238,7 @@
 
                         .progressFill {
                             height: 100%;
-                            background-color: var(--accent);
+                            background-color: var(--c-accent-strong);
                             border-radius: 2px;
                             transition: width 0.3s ease;
                             }
@@ -214,16 +248,16 @@
                             font-size: 12px;
                             color: var(--text-secondary);
                         }
-                        
+
                         .mm {
                             font-size: 18px;
-                            color: var(--accent);
+                            color: var(--c-accent);
                             font-weight: var(--fw-bold);
                         }
 
                         .number {
                             font-size: 18px;
-                            color: var(--accent);
+                            color: var(--c-accent);
                         }
                    }
                 }

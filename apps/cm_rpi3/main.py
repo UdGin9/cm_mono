@@ -2,14 +2,14 @@ from flask import Flask, jsonify, Response
 from flask_cors import CORS
 import threading
 
-from config import CAMERA_IDS, FLASK_PORT, USE_MOCK_SENSOR, READ_PROCESSED_DISTANCE
+from config import CAMERA_IDS, CAMERA_ROTATIONS, FLASK_PORT, USE_MOCK_SENSOR, READ_PROCESSED_DISTANCE
 from modules.camera_stream import CameraStream
 from modules.sensor_reader import SensorReader
 
 app = Flask(__name__)
 CORS(app)
 
-camera_stream = CameraStream(CAMERA_IDS)
+camera_stream = CameraStream(CAMERA_IDS, CAMERA_ROTATIONS)
 sensor_reader_1 = SensorReader(
     port='/dev/ttyUSB0',
     baudrate=9600,

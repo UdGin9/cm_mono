@@ -86,7 +86,7 @@ export const Header = () => {
                             <div className={s.statLabel}>ОБЩАЯ ЗАГРУЗКА</div>
                             <div className={s.statValue}>{load_all}%</div>
                             <div className={s.progressBar}>
-                            <div className={s.progressFill} style={{ width: `${load_all}` }}></div>
+                            <div className={s.progressFill} style={{ width: `${load_all}%` }}></div>
                             </div>
                         </div>
 
