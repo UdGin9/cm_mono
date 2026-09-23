@@ -21,8 +21,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Подсчёт загрузки вагонов: среднее последних 3 замеров датчика,
-# отклонение от нулевой метки; +20 мм = 100% загрузки.
-SENSOR_NORMS = {'sensor_0': 33, 'sensor_1': 33, 'sensor_4': 78}
+# отклонение от нулевой метки; −20 мм = 100% загрузки.
+SENSOR_NORMS = {'sensor_0': 50, 'sensor_1': 50, 'sensor_4': 78}
 LOAD_FULL_DEV_MM = 20
 LOAD_WAGON_WEIGHTS = (0.10, 0.50, 0.40)  # вагон 1 (головной), 2 (промежуточный), 3 (концевой)
 
@@ -33,7 +33,7 @@ def calc_load(sensor_key: str) -> int:
     if not values:
         return 0
     avg = sum(values) / len(values)
-    load = (avg - SENSOR_NORMS[sensor_key]) / LOAD_FULL_DEV_MM * 100
+    load = (SENSOR_NORMS[sensor_key] - avg) / LOAD_FULL_DEV_MM * 100
     return round(max(0, load))
 
 local_cameras = CameraStream(LOCAL_CAMERA_IDS, CAMERA_ROTATIONS)

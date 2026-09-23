@@ -21,18 +21,18 @@ const getLoadClass = (load: number): string => {
 
 // Нулевые отметки датчиков (мм). sensor_4 — головной вагон, у него своя метка.
 const SENSOR_NORMS: Record<string, number> = {
-  sensor_0: 33,
-  sensor_1: 33,
-  sensor_2: 33,
-  sensor_3: 33,
+  sensor_0: 50,
+  sensor_1: 50,
+  sensor_2: 50,
+  sensor_3: 50,
   sensor_4: 78,
 }
 
-// Состояние ДАТЧИКА уровня — отклонение В БОЛЬШУЮ сторону от нулевой метки:
+// Состояние ДАТЧИКА уровня — отклонение В МЕНЬШУЮ сторону от нулевой метки:
 //   >15 мм → красный, >7 мм → жёлтый, иначе норма (синий).
-// В меньшую сторону отклонения не считаем.
+// В большую сторону отклонения не считаем.
 const getSensorClass = (sensorKey: string, mm: number): string => {
-  const dev = mm - SENSOR_NORMS[sensorKey]
+  const dev = SENSOR_NORMS[sensorKey] - mm
   if (dev > 15) return s.stateDanger
   if (dev > 7) return s.stateWarning
   return s.stateNormal
