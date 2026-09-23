@@ -28,13 +28,13 @@ const SENSOR_NORMS: Record<string, number> = {
   sensor_4: 78,
 }
 
-// Состояние ДАТЧИКА уровня — отклонение В МЕНЬШУЮ сторону от нулевой метки:
-//   >15 мм → красный, >7 мм → жёлтый, иначе норма (синий).
+// Состояние ДАТЧИКА уровня — отклонение В МЕНЬШУЮ сторону от нулевой метки
+// (полная загрузка = −35 мм): >26 мм → красный, >12 мм → жёлтый, иначе норма (синий).
 // В большую сторону отклонения не считаем.
 const getSensorClass = (sensorKey: string, mm: number): string => {
   const dev = SENSOR_NORMS[sensorKey] - mm
-  if (dev > 15) return s.stateDanger
-  if (dev > 7) return s.stateWarning
+  if (dev > 26) return s.stateDanger
+  if (dev > 12) return s.stateWarning
   return s.stateNormal
 }
 
