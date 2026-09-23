@@ -23,7 +23,7 @@ CORS(app)
 # Подсчёт загрузки вагонов: среднее последних 3 замеров датчика,
 # отклонение от нулевой метки; −20 мм = 100% загрузки.
 SENSOR_NORMS = {'sensor_0': 50, 'sensor_1': 50, 'sensor_4': 78}
-LOAD_FULL_DEV_MM = 20
+LOAD_FULL_DEV_MM = 40
 LOAD_WAGON_WEIGHTS = (0.10, 0.50, 0.40)  # вагон 1 (головной), 2 (промежуточный), 3 (концевой)
 
 sensor_history = {key: deque(maxlen=3) for key in SENSOR_NORMS}
