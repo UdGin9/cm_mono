@@ -6,11 +6,6 @@ import { useVoltageStore } from '../../store/voltageStore'
 import { VoltageChart } from './components/VoltageChart'
 import { useVoltagePoling } from '../../hooks/useVoltagePoling'
 
-// Состояние карточки ЗАГРУЗКИ вагона (loadValue, %):
-//   0–50%   → красный (недогруз)
-//   50–99%  → жёлтый  (в процессе заполнения)
-//   100%    → зелёный (заполнен идеально)
-//   >100%   → красный (перегруз)
 const getLoadClass = (load: number): string => {
   const v = Math.round(load)
   if (v > 100) return s.stateDanger
@@ -19,7 +14,6 @@ const getLoadClass = (load: number): string => {
   return s.stateDanger
 }
 
-// Нулевые отметки датчиков (мм). sensor_4 — головной вагон, у него своя метка.
 const SENSOR_NORMS: Record<string, number> = {
   sensor_0: 50,
   sensor_1: 50,
@@ -28,9 +22,6 @@ const SENSOR_NORMS: Record<string, number> = {
   sensor_4: 78,
 }
 
-// Состояние ДАТЧИКА уровня — отклонение В МЕНЬШУЮ сторону от нулевой метки
-// (полная загрузка = −35 мм): >26 мм → красный, >12 мм → жёлтый, иначе норма (синий).
-// В большую сторону отклонения не считаем.
 const getSensorClass = (sensorKey: string, mm: number): string => {
   const dev = SENSOR_NORMS[sensorKey] - mm
   if (dev > 26) return s.stateDanger
@@ -38,8 +29,6 @@ const getSensorClass = (sensorKey: string, mm: number): string => {
   return s.stateNormal
 }
 
-// Состояние НАПРЯЖЕНИЯ — по voltageStatuses из стора (SSE-события).
-// edge — окантовка всей карточки: жёлтая при warning, красная при critical.
 type VoltageStatus = 'normal' | 'warning' | 'critical'
 const getVoltageState = (status: VoltageStatus = 'normal'): { cls: string; color: string; edge: string } => {
   if (status === 'critical') return { cls: s.stateDanger, color: 'var(--state-danger)', edge: s.edgeDanger }
@@ -56,7 +45,6 @@ export const VoltagePage = () => {
 
   const { voltage_0, voltage_1, voltage_2, voltageStatuses, nominal, tolerance, voltageHistory } = useVoltageStore()
 
-  // Подпись номинала формируется из значений, пришедших с бэка → всегда им соответствует.
   const nominalLabel = `НОМ ${nominal.toFixed(2)} ±${tolerance}`
 
   const v0 = getVoltageState(voltageStatuses.voltage_0 as VoltageStatus)

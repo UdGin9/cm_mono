@@ -2,7 +2,6 @@ import { create } from 'zustand';
 
 type VoltageStatus = 'normal' | 'warning' | 'critical';
 
-// Сколько последних значений храним для графиков.
 const MAX_HISTORY = 30;
 const VOLTAGE_KEYS = ['voltage_0', 'voltage_1', 'voltage_2'] as const;
 type VoltageKey = typeof VOLTAGE_KEYS[number];

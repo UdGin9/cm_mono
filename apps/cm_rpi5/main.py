@@ -12,6 +12,7 @@ from modules.camera_stream import CameraStream
 from modules.sensor_reader import SensorReader
 from modules.assistent_client import AssistantClient
 from modules.voltage_stream import VoltageStream
+from modules.forecast import LoadForecast
 
 logging.basicConfig(level=logging.INFO)
 
@@ -20,13 +21,12 @@ logging.getLogger('werkzeug').setLevel(logging.WARNING)
 app = Flask(__name__)
 CORS(app)
 
-# Подсчёт загрузки вагонов: среднее последних 3 замеров датчика,
-# отклонение от нулевой метки; −20 мм = 100% загрузки.
 SENSOR_NORMS = {'sensor_0': 50, 'sensor_1': 50, 'sensor_4': 78}
 LOAD_FULL_DEV_MM = 35
-LOAD_WAGON_WEIGHTS = (0.10, 0.50, 0.40)  # вагон 1 (головной), 2 (промежуточный), 3 (концевой)
+LOAD_WAGON_WEIGHTS = (0.10, 0.50, 0.40)
 
 sensor_history = {key: deque(maxlen=3) for key in SENSOR_NORMS}
+load_forecast = LoadForecast()
 
 def calc_load(sensor_key: str) -> int:
     values = sensor_history[sensor_key]
@@ -86,7 +86,6 @@ def get_all_sensors():
     for key in sensor_history:
         sensor_history[key].append(data[key])
 
-    # Вагон 1 — головной (sensor_4), вагон 2 — промежуточный (sensor_0), вагон 3 — концевой (sensor_1).
     data['load_vagon_1'] = calc_load('sensor_4')
     data['load_vagon_2'] = calc_load('sensor_0')
     data['load_vagon_3'] = calc_load('sensor_1')
@@ -95,6 +94,9 @@ def get_all_sensors():
         + data['load_vagon_2'] * LOAD_WAGON_WEIGHTS[1]
         + data['load_vagon_3'] * LOAD_WAGON_WEIGHTS[2]
     )
+
+    load_forecast.update(data['load_all'])
+    data['load_eta_min'] = load_forecast.eta_minutes()
 
     return jsonify(data)
 

@@ -7,7 +7,7 @@ from dataclasses import dataclass
 class VoltageEvent:
     voltage: str
     value: float
-    event_type: str  # "warning", "critical"
+    event_type: str
     message: str
 
 class VoltageStream:

@@ -10,7 +10,6 @@ export interface VoltageEvent {
   message: string;
 }
 
-// Единый payload из /voltage/events: значения, событие и номинал — из одного снимка.
 interface VoltagePayload {
   voltages: Record<string, number>;
   event: VoltageEvent;
@@ -34,7 +33,6 @@ export const useVoltageEvents = () => {
       try {
         const payload = JSON.parse(e.data) as VoltagePayload;
 
-        // Значения и номинал обновляем тем же снимком, что и тост → они всегда совпадают.
         if (payload.voltages) setAllVoltages(payload.voltages)
         if (typeof payload.nominal === 'number') setNominal(payload.nominal, payload.tolerance)
 

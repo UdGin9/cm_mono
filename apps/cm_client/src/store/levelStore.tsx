@@ -10,6 +10,7 @@ type StateLevel = {
   load_vagon_2: number, 
   load_vagon_3: number,
   load_all: number,
+  load_eta_min: number | null,
 }
 
 type ActionsLevel= {
@@ -26,5 +27,6 @@ export const useLevelStore = create<StateLevel & ActionsLevel>((set) => ({
   load_vagon_2: 0,
   load_vagon_3: 0,
   load_all: 0,
+  load_eta_min: null,
   setLevels: (levels) => set(levels),
 }))

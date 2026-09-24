@@ -11,19 +11,16 @@
 
     --red: #E11D2B;
 
-    --border-light: #D6DCEA;        /* color/azure/88 — рамка по умолчанию */
+    --border-light: #D6DCEA;
 
-    /* danger — красный (red/50 + accents/red) */
     --state-danger: #E11D2B;
     --state-danger-strong: #FF383C;
     --state-danger-bg: rgba(225, 29, 43, 0.08);
 
-    /* warning — жёлтый/оранжевый (tangerine) */
     --state-warning: #E08A00;
     --state-warning-strong: #E08A00;
     --state-warning-bg: rgba(224, 138, 0, 0.12);
 
-    /* ok — зелёный (вагон заполнен на 100%) */
     --state-ok: #16A34A;
     --state-ok-strong: #16A34A;
     --state-ok-bg: rgba(22, 163, 74, 0.10);

@@ -1,4 +1,3 @@
-# camera_stream.py
 import cv2
 from flask import Response
 
@@ -10,7 +9,6 @@ ROTATE_CODES = {
 
 class CameraStream:
     def __init__(self, camera_ids, rotations=None):
-        # Повороты приводим к позициям в self.cams: generate_feed получает индекс, а не физический id.
         self.rotations = [ROTATE_CODES.get((rotations or {}).get(cam_id, 0)) for cam_id in camera_ids]
         self.cams = []
         for cam_id in camera_ids:
