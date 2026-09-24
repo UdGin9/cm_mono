@@ -12,6 +12,7 @@ export const Header = () => {
     const navigate = useNavigate()
 
     const { load_all, load_eta_min } = useLevelStore()
+    console.log(load_eta_min)
 
     const [shiftStart] = useState(() => new Date())
     const [time, setTime] = useState(new Date())

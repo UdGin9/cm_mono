@@ -21,8 +21,8 @@ logging.getLogger('werkzeug').setLevel(logging.WARNING)
 app = Flask(__name__)
 CORS(app)
 
-SENSOR_NORMS = {'sensor_0': 50, 'sensor_1': 50, 'sensor_4': 78}
-LOAD_FULL_DEV_MM = 35
+SENSOR_NORMS = {'sensor_0': 27, 'sensor_1': 27, 'sensor_4': 77}
+LOAD_FULL_DEV_MM = 13
 LOAD_WAGON_WEIGHTS = (0.10, 0.50, 0.40)
 
 sensor_history = {key: deque(maxlen=3) for key in SENSOR_NORMS}

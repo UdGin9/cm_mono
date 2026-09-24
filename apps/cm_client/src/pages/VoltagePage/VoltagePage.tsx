@@ -8,18 +8,17 @@ import { useVoltagePoling } from '../../hooks/useVoltagePoling'
 
 const getLoadClass = (load: number): string => {
   const v = Math.round(load)
-  if (v > 100) return s.stateDanger
-  if (v === 100) return s.stateOk
+  if (v >= 100) return s.stateOk
   if (v >= 50) return s.stateWarning
   return s.stateDanger
 }
 
 const SENSOR_NORMS: Record<string, number> = {
-  sensor_0: 50,
-  sensor_1: 50,
-  sensor_2: 50,
-  sensor_3: 50,
-  sensor_4: 78,
+  sensor_0: 27,
+  sensor_1: 27,
+  sensor_2: 27,
+  sensor_3: 27,
+  sensor_4: 77,
 }
 
 const getSensorClass = (sensorKey: string, mm: number): string => {
