@@ -8,7 +8,8 @@ import { useVoltagePoling } from '../../hooks/useVoltagePoling'
 
 const getLoadClass = (load: number): string => {
   const v = Math.round(load)
-  if (v >= 100) return s.stateOk
+  if (v > 100) return s.stateDanger
+  if (v >= 98) return s.stateOk
   if (v >= 50) return s.stateWarning
   return s.stateDanger
 }

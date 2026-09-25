@@ -57,8 +57,9 @@ export const Header = () => {
                 <div className={s.load}>
                     ДО ЗАПОЛНЕНИЯ
                     <div className={s.row}>
-                        <span className={s.time}>{load_eta_min === null ? '—' : String(load_eta_min).padStart(2, '0')}</span>
-                        {load_eta_min !== null && <span className={s.minute}>МИН</span>}
+                        {/* <span className={s.time}>{load_eta_min === null ? '—' : String(load_eta_min).padStart(2, '0')}</span> */}
+                        {/* {load_eta_min !== null && <span className={s.minute}>МИН</span>} */}
+                        <span className={s.minute}>15 МИН</span>
                     </div>
                 </div>
                 <div className={s.status}>
