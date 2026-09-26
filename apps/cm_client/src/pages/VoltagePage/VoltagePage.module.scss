@@ -255,6 +255,31 @@
                         }
                    }
                 }
-        } 
+        }
     }
+}
+
+@media (max-width: 1600px) {
+    .pageContainer { padding: 18px 32px; }
+    .pageContainer .vagonsContainer .vagon img { height: 150px; }
+    .pageContainer .cardsContainer .card .head .name { font-size: 18px; }
+    .pageContainer .cardsContainer .card .chartContainer .info .voltage { font-size: 38px; }
+}
+
+@media (max-width: 1280px) {
+    .pageContainer { padding: 16px 20px; gap: 8px; }
+    .pageContainer .vagonsContainer { gap: 8px; }
+    .pageContainer .vagonsContainer .vagon img { height: 120px; }
+    .pageContainer .cardsContainer { gap: 6px; }
+    .pageContainer .cardsContainer .card { padding: 0 10px 12px 10px; }
+    .pageContainer .cardsContainer .card .chartContainer { padding: 10px 12px; }
+    .pageContainer .cardsContainer .card .chartContainer .info .voltage { font-size: 32px; }
+    .pageContainer .cardsContainer .card .levelCards .levelCard,
+    .pageContainer .cardsContainer .card .levelCards .loadCard { padding: 8px 10px; }
+}
+
+@media (max-width: 1024px) {
+    .pageContainer { padding: 14px 16px; }
+    .pageContainer .vagonsContainer .vagon img { height: 100px; }
+    .pageContainer .cardsContainer { flex-direction: column; }
 }
